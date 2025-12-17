@@ -8,15 +8,16 @@ datasource db {
 }
 
 enum Role {
-  ADMIN
-  SALES_EXECUTIVE
+  admin
+  sales_executive
 }
 
 model User {
-  id        String @id @default(uuid())
+  id        String  @id @default(uuid())
   firstName String
-  lastName  String
-  email     String @unique
+  lastName  String?
+  email     String  @unique
   password  String
-  role      Role   @default(SALES_EXECUTIVE)
+  phone     String  @unique
+  role      Role    @default(sales_executive)
 }
