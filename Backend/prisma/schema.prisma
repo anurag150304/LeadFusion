@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client"
+  output = "../src/generated/prisma"
 }
 
 datasource db {
@@ -13,11 +13,20 @@ enum Role {
 }
 
 model User {
-  id        String  @id @default(uuid())
-  firstName String
-  lastName  String?
-  email     String  @unique
-  password  String
-  phone     String  @unique
-  role      Role    @default(sales_executive)
+  id String @id @default(uuid())
+  fistName String
+  lastName String?
+  email String @unique
+  password String
+  phone String @unique
+  role Role @default(sales_executive)
+  createdAt DateTime @default(now())
 }
+
+// model Lead {
+//   id Int @id @default(autoincrement())
+//   customerName String
+//   customerEmail String?
+//   customerPhone String
+  
+// }

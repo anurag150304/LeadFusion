@@ -4,6 +4,7 @@ import { generateToken, hashPassword } from "../utils/common.utils.js";
 import { createUser, validateUser } from "../service/user.service.js";
 import { ErrHandler } from "../types/errHandler.js";
 import type { AuthenticatedRequest } from "../types/common.type.js";
+import redisClient from "../redis/db.js";
 
 export async function signupUser(req: Request, res: Response) {
     const parsedData = signupSchema.safeParse(req.body);
@@ -38,7 +39,10 @@ export async function getUserProfile(req: Request, res: Response) {
     return res.status(200).json({ user: (req as AuthenticatedRequest).user });
 }
 
-export async function signoutUser(_: Request, res: Response) {
+export async function signoutUser(req: Request, res: Response) {
+    const token = req.cookies?.auth_token || req.headers.authorization?.split(" ")[1];
+    await redisClient.set(`token_${token}`, "blacklisted", "EX", 60 * 60 * 24); // Expire in 24 hours
+
     res.clearCookie("auth_token");
     return res.status(200).json({ message: "Signed out successfully" });
 }

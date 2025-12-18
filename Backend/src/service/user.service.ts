@@ -1,5 +1,5 @@
 import DB from "../config/db.config.js";
-import { Role } from "../generated/prisma/index.js";
+import { Role } from "@prisma/client";
 import type { User } from "../types/common.type.js";
 import { ErrHandler } from "../types/errHandler.js";
 import { comparePassword } from "../utils/common.utils.js";
