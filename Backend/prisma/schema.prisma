@@ -12,48 +12,37 @@ enum Role {
   sales_executive
 }
 
-enum States {
-  Delhi
-  Haryana
-  Punjab
-  Rajasthan
-  UttarPradesh
-  Bihar
-  MadhyaPradesh
-  Gujarat
-  Maharashtra
-  WestBengal
-  TamilNadu
-  Karnataka
-  AndhraPradesh
-  Odisha
-  Telangana
-  Assam
-  Jharkhand
-  Chhattisgarh
-  Uttarakhand
-  HimachalPradesh
-  JammuAndKashmir
-  Goa
-  Sikkim
-  Arunachal
-  Nagaland
-  Manipur
-  Mizoram
-  Tripura
-  Meghalaya
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CONVERTED
+  LOST
 }
 
 enum LeadSource {
-  Website
-  MetaAds
-  GoogleAds
+  WEBSITE
+  META_ADS
+  GOOGLE_ADS
 }
 
-enum VehicleType {
-  Car
-  Bike
-  Bus
+enum VechicleType {
+  AC
+  NON_AC
+}
+
+enum TripType {
+  ONE_WAY
+  ROUND_TRIP
+}
+
+enum Vechicle {
+  Cars
+  SUVs
+  LuxuryCars
+  TempoTraveller
+  MiniBus
+  LuxuryBus
 }
 
 model User {
@@ -68,12 +57,23 @@ model User {
 }
 
 model Lead {
-  id          Int         @id @default(autoincrement())
-  name        String
-  email       String?
-  phone       String
-  state       States
-  source      LeadSource
-  vehicleType VehicleType @default(Bus)
-  createdOn   DateTime    @default(now())
+  id             Int          @id @default(autoincrement())
+  fullName       String
+  email          String?
+  phone          String
+  pickupAddress  String
+  dropAddress    String
+  pickupDateTime DateTime
+  dropDateTime   DateTime
+  passengers     Int
+  Luggage        Int
+  vechicle       Vechicle
+  vechicleType   VechicleType @default(AC)
+  tripType       TripType     @default(ONE_WAY)
+  city           String
+  source         LeadSource
+  status         LeadStatus   @default(NEW)
+  note           String?
+  createdOn      DateTime     @default(now())
+  updatedOn      DateTime     @updatedAt
 }
