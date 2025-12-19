@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output = "../src/generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -12,21 +12,68 @@ enum Role {
   sales_executive
 }
 
-model User {
-  id String @id @default(uuid())
-  fistName String
-  lastName String?
-  email String @unique
-  password String
-  phone String @unique
-  role Role @default(sales_executive)
-  createdAt DateTime @default(now())
+enum States {
+  Delhi
+  Haryana
+  Punjab
+  Rajasthan
+  UttarPradesh
+  Bihar
+  MadhyaPradesh
+  Gujarat
+  Maharashtra
+  WestBengal
+  TamilNadu
+  Karnataka
+  AndhraPradesh
+  Odisha
+  Telangana
+  Assam
+  Jharkhand
+  Chhattisgarh
+  Uttarakhand
+  HimachalPradesh
+  JammuAndKashmir
+  Goa
+  Sikkim
+  Arunachal
+  Nagaland
+  Manipur
+  Mizoram
+  Tripura
+  Meghalaya
 }
 
-// model Lead {
-//   id Int @id @default(autoincrement())
-//   customerName String
-//   customerEmail String?
-//   customerPhone String
-  
-// }
+enum LeadSource {
+  Website
+  MetaAds
+  GoogleAds
+}
+
+enum VehicleType {
+  Car
+  Bike
+  Bus
+}
+
+model User {
+  id        String   @id @default(uuid())
+  fistName  String
+  lastName  String?
+  email     String   @unique
+  password  String
+  phone     String   @unique
+  role      Role     @default(sales_executive)
+  createdOn DateTime @default(now())
+}
+
+model Lead {
+  id          Int         @id @default(autoincrement())
+  name        String
+  email       String?
+  phone       String
+  state       States
+  source      LeadSource
+  vehicleType VehicleType @default(Bus)
+  createdOn   DateTime    @default(now())
+}
