@@ -1,4 +1,4 @@
-import DB from "../config/db.config.js";
+import DB from "../lib/db.config.js";
 import { Role } from "@prisma/client";
 import type { User } from "../types/common.type.js";
 import { ErrHandler } from "../types/errHandler.js";

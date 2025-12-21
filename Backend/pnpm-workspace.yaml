@@ -1,5 +1,7 @@
 onlyBuiltDependencies:
+  - '3000'
   - '@prisma/client'
   - '@prisma/engines'
   - bcrypt
+  - ngrok
   - prisma

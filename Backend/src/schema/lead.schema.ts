@@ -18,7 +18,9 @@ export const leadSchema = z.object({
     vechicleType: z.enum(["AC", "NON_AC"]).default("AC"),
     tripType: z.enum(["ONE_WAY", "ROUND_TRIP"]).default("ONE_WAY"),
     city: z.string().min(1, "City is required"),
-    source: z.string().min(1, "Lead source is required"),
-    status: z.string().default("NEW"),
+    source: z.enum(["WEBSITE", "META_ADS", "GOOGLE_ADS"]).default("WEBSITE"),
+    status: z.enum(["NEW", "CONTACTED", "QUALIFIED", "CONVERTED", "LOST"]).default("NEW"),
     note: z.string().optional(),
 });
+
+export type LeadSchema = z.infer<typeof leadSchema>

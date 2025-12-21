@@ -1,7 +1,7 @@
-import DB from "../config/db.config.js";
-import type { Lead } from "../types/common.type.js";
+import DB from "../lib/db.config.js";
+import type { LeadSchema } from "../schema/lead.schema.js";
 
-export async function createNewLead(data: Lead) {
+export async function createNewLead(data: LeadSchema) {
     const {
         fullName,
         email,
